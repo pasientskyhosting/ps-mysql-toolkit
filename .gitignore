@@ -1,0 +1,4 @@
+# Module directory
+.DS_Store
+# VScode
+.vscode/*
