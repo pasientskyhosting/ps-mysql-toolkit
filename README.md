@@ -79,7 +79,7 @@ as the dump itself. The advantages of mydumper are:
 - Consistency - maintains snapshot across all threads, provides accurate master and slave log positions, etc
 - Manageability - supports PCRE for specifying database and tables inclusions and exclusions
 
-## mydumper usage
+### mydumper usage
 
 ```
 $ docker exec -it pasientskyhosting/ps-mysql-toolkit:1.0 mydumper --help
@@ -137,7 +137,7 @@ Application Options:
   --defaults-file             Use a specific defaults file
 ```
 
-## myloader usage
+### myloader usage
 ```
 $ docker exec -it pasientskyhosting/ps-mysql-toolkit:1.0 myloader --help
 Usage:
@@ -171,7 +171,7 @@ MySQLTuner is a script written in Perl that allows you to review a MySQL install
 
 MySQLTuner supports ~300 indicators for MySQL/MariaDB/Percona Server in this last version.
 
-## mysqltuner usage
+### mysqltuner usage
 
 ```
 $ docker exec -it pasientskyhosting/ps-mysql-toolkit:1.0 mysqltuner --help
@@ -213,7 +213,7 @@ Output Options:
      --nobad                     Remove negative/suggestion responses
      --noinfo                    Remove informational responses
      --debug                     Print debug information
-     --noprocess                Consider no other process is running
+     --noprocess                 Consider no other process is running
      --dbstat                    Print database information
      --nodbstat                  Don't Print database information
      --tbstat                    Print table information
