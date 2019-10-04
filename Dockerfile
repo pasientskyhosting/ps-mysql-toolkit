@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.10
 MAINTAINER Chad Jones<cj@patientsky.com.com>
 
 ENV PERCONA_TOOLKIT_VERSION="3.0.13" \
@@ -9,6 +9,7 @@ ENV PERCONA_TOOLKIT_VERSION="3.0.13" \
 RUN set -x \
   && apk add --update \
       perl \
+      perl-doc \
       perl-dbi \
       perl-dbd-mysql \
       perl-io-socket-ssl \
@@ -24,6 +25,10 @@ RUN set -x \
       bash \
       $BUILD_PACKAGES \
   && update-ca-certificates \
+  && wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl -O /usr/bin/mysqltuner \
+  && wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/basic_passwords.txt -O /usr/bin/basic_passwords.txt \
+  && wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/vulnerabilities.csv -O /usr/bin/vulnerabilities.csv \
+  && chmod +x /usr/bin/mysqltuner \
   && wget -O /tmp/percona-toolkit.tar.gz https://www.percona.com/downloads/percona-toolkit/${PERCONA_TOOLKIT_VERSION}/source/tarball/percona-toolkit-${PERCONA_TOOLKIT_VERSION}.tar.gz \
   && tar -xzvf /tmp/percona-toolkit.tar.gz -C /tmp \
   && cd /tmp/percona-toolkit-${PERCONA_TOOLKIT_VERSION} \
