@@ -1,29 +1,30 @@
 FROM alpine:3.10
-MAINTAINER Chad Jones<cj@patientsky.com.com>
+LABEL Chad Jones<cj@patientsky.com.com>
 
-ENV PERCONA_TOOLKIT_VERSION="3.0.13" \
-    BUILD_PATH="/opt/mydumper-src/" \
-    BUILD_PACKAGES="make cmake build-base git" \
-    MYDUMPER_TAG="v0.9.5 "
+ENV PERCONA_TOOLKIT_VERSION="3.3.1" \
+  BUILD_PATH="/opt/mydumper-src/" \
+  BUILD_PACKAGES="make cmake build-base git" \
+  MYDUMPER_TAG="v0.10.7-2"
 
 RUN set -x \
   && apk add --update \
-      perl \
-      perl-doc \
-      perl-dbi \
-      perl-dbd-mysql \
-      perl-io-socket-ssl \
-      perl-term-readkey \
-      ca-certificates \
-      wget \
-      glib-dev \
-      zlib-dev \
-      pcre-dev \
-      libressl-dev \
-      mariadb-connector-c-dev \
-      mariadb-connector-c \
-      bash \
-      $BUILD_PACKAGES \
+  perl \
+  perl-doc \
+  perl-dbi \
+  perl-dbd-mysql \
+  perl-io-socket-ssl \
+  perl-term-readkey \
+  ca-certificates \
+  wget \
+  glib-dev \
+  zlib-dev \
+  pcre-dev \
+  libressl-dev \
+  mariadb-client \
+  mariadb-connector-c-dev \
+  mariadb-connector-c \
+  bash \
+  $BUILD_PACKAGES \
   && update-ca-certificates \
   && wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl -O /usr/bin/mysqltuner \
   && wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/basic_passwords.txt -O /usr/bin/basic_passwords.txt \
@@ -39,7 +40,7 @@ RUN set -x \
   && git clone https://github.com/maxbube/mydumper.git $BUILD_PATH \
   && cd $BUILD_PATH \
   && git checkout tags/$MYDUMPER_TAG \
-  && cmake . \
+  && cmake -DWITH_SSL=OFF . \
   && make \
   && mv ./mydumper /usr/bin/. \
   && mv ./myloader /usr/bin/. \
