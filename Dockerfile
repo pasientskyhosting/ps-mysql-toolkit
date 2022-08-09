@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:latest
 LABEL Chad Jones<cj@patientsky.com.com>
 
 ENV PERCONA_TOOLKIT_VERSION="3.3.1" \
