@@ -1,10 +1,10 @@
 FROM alpine:latest
 LABEL Chad Jones<cj@patientsky.com.com>
 
-ENV PERCONA_TOOLKIT_VERSION="3.3.1" \
+ENV PERCONA_TOOLKIT_VERSION="3.4.0" \
   BUILD_PATH="/opt/mydumper-src/" \
   BUILD_PACKAGES="make cmake build-base git" \
-  MYDUMPER_TAG="v0.10.7-2"
+  MYDUMPER_TAG="v0.12.5-3"
 
 RUN set -x \
   && apk add --update \
@@ -37,7 +37,7 @@ RUN set -x \
   && make \
   && make test \
   && make install \
-  && git clone https://github.com/maxbube/mydumper.git $BUILD_PATH \
+  && git clone https://github.com/mydumper/mydumper.git $BUILD_PATH \
   && cd $BUILD_PATH \
   && git checkout tags/$MYDUMPER_TAG \
   && cmake -DWITH_SSL=OFF . \
